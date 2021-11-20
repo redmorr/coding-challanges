@@ -25,12 +25,3 @@ class Solution:
         result_sum = dfs(s)
 
         return result_sum
-
-
-
-
-
-
-
-s = Solution()
-s.numDecodings(50 * "1")
