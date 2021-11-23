@@ -1,12 +1,13 @@
-from unittest import TestCase
+import pytest
+
 from dp import Solution
 
-class TestSolution(TestCase):
-    def test_minimum_total(self):
-        s = Solution()
+testdata = [(11, [[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]),
+            (10, [[2], [3, 4], [6, 5, 7]]),
+            (5, [[2], [3, 4]]),
+            (2, [[2]])]
 
-        self.assertEqual(11, s.minimumTotal([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]))
-        self.assertEqual(10, s.minimumTotal([[2], [3, 4], [6, 5, 7]]))
-        self.assertEqual(5, s.minimumTotal([[2], [3, 4]]))
-        self.assertEqual(2, s.minimumTotal([[2]]))
 
+@pytest.mark.parametrize('expected, triangle', testdata)
+def test_minimum_path_sum(expected, triangle):
+    assert expected == Solution().minimumTotal(triangle)
