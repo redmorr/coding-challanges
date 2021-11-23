@@ -19,5 +19,5 @@ class Solution:
                     new_dp.append(path[:-1] + [path[-1] * 10 + int(digit)])
             # print(new_dp)
             dp = new_dp
-            print("Current possible paths: " + str(len(dp)))
+            # print("Current possible paths: " + str(len(dp)))
         return len(dp)
