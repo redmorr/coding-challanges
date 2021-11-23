@@ -12,8 +12,7 @@ small_testdata = [(1, [1]),
 @pytest.mark.parametrize('expected, input_array', small_testdata)
 @pytest.mark.parametrize('solution_class', [brute_force.Solution, kadane.Solution], ids=["Brute Force", "Kadane"])
 def test_small_examples(solution_class, expected, input_array):
-    s = solution_class()
-    assert expected == s.maxSubArray(input_array)
+    assert expected == solution_class().maxSubArray(input_array)
 
 
 large_testdata = [(-10000, [-10000] * 100000),
@@ -21,10 +20,7 @@ large_testdata = [(-10000, [-10000] * 100000),
 
 
 # Brute force approach results in Time Limit Exceeded on large arrays, so we skip it, we know it will fail
-
-
 @pytest.mark.parametrize('expected, input_array', large_testdata)
 @pytest.mark.parametrize('solution_class', [kadane.Solution], ids=["Kadane"])
 def test_large_examples(solution_class, expected, input_array):
-    s = solution_class()
-    assert expected == s.maxSubArray(input_array)
+    assert expected == solution_class().maxSubArray(input_array)
