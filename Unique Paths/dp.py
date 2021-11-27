@@ -7,7 +7,7 @@ class Solution:
                 dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
         return dp[m - 1][n - 1]
 
-    # Redeclared method from above with better memory complexity to compare code
+    # Redeclare method from above with better memory complexity to compare code
     def uniquePaths(self, m: int, n: int) -> int:
         dp = [1 for _ in range(n)]
 
@@ -17,7 +17,8 @@ class Solution:
         return dp[n - 1]
 
     def uniquePathsWithObstacles(self, obstacleGrid: [[int]]) -> int:
-        result = obstacleGrid[0]
+        # Slicing '[:]' or 'list()' to copy 'obstacleGrid[0]' by value instead of by reference
+        result = list(obstacleGrid[0])
 
         for i, item in enumerate(obstacleGrid[0]):
             if item == 1:
