@@ -1,20 +1,21 @@
-# Unique Path's
+# Unique Path's I
 A robot is located at the top-left corner of a `m x n` grid (marked 'Start' in the diagram below).
 
-The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner 
+of the grid (marked 'Finish' in the diagram below).
 
 How many possible unique paths are there?
 
 **Example 1:**
 
-S = Start
-
-F = Finish
-
 | S | . | . | . | . | . | . |
 |---|---|---|---|---|---|---|
 | . | . | . | . | . | . | . |
 | . | . | . | . | . | . | F |
+
+S = Start
+
+F = Finish
 
     Input: m = 3, n = 7
     Output: 28
@@ -89,3 +90,52 @@ So basically 6 times `R` and 2 times `D`.
     C(8,6) = 8! / (2! * 6!)
 
 Avoid calulating large factorials by using iteration with decreasing multiplication by 1 and increasing division by 1.
+
+# Unique Path's II 
+https://leetcode.com/problems/unique-paths-ii/
+
+A robot is located at the top-left corner of a `m x n` grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner 
+of the grid (marked 'Finish' in the diagram below).
+
+Now consider if some obstacles are added to the grids. How many unique paths would there be?
+
+An obstacle and space is marked as `1` and `0` respectively in the grid.
+
+**Example 1:**
+
+| S | . | . |
+|---|---|---|
+| . | O | . |
+| . | . | F |
+
+S = Start
+
+F = Finish
+
+O = Obstacle
+
+    Input: obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]
+    Output: 2
+    Explanation: There is one obstacle in the middle of the 3x3 grid above.
+    There are two ways to reach the bottom-right corner:
+    1. Right -> Right -> Down -> Down
+    2. Down -> Down -> Right -> Right
+
+**Constraints:**
+
+    m == obstacleGrid.length
+    n == obstacleGrid[i].length
+    1 <= m, n <= 100
+    obstacleGrid[i][j] is 0 or 1.
+
+# Solution 1 - Recursion
+Reuse previous recursive solution with more conditions added:
+* return 0 if helper met an obstacle, it means this is nota valid path
+* if a wall is met continue along with it to check for obstacles instead of assuming there is only one valid path
+
+# Solution 2 - DP
+Anything after an obstacle in the first row is inaccessible so all possible paths after that are 0. After initializing 
+first row reuse DP solution from Unique Path's I, but whenever there is an obstacle inset zero.
+
