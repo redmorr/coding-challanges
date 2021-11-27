@@ -40,6 +40,6 @@ def test_unique_paths_rotate_grid(solution_class, expected, grid_width, grid_len
 
 
 @pytest.mark.parametrize('expected, grid', testcases_obstacles)
-@pytest.mark.parametrize('solution_class', [dp.Solution], ids=['DP'])
+@pytest.mark.parametrize('solution_class', [dp.Solution, recursion.Solution], ids=['DP', 'Recursion'])
 def test_unique_paths_with_obstacles(solution_class, expected, grid):
     assert expected == solution_class().uniquePathsWithObstacles(grid)

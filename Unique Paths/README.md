@@ -130,6 +130,12 @@ O = Obstacle
     1 <= m, n <= 100
     obstacleGrid[i][j] is 0 or 1.
 
-# Solution 1 - DP
+# Solution 1 - Recursion
+Reuse previous recursive solution with more conditions added:
+* return 0 if helper met an obstacle, it means this is nota valid path
+* if a wall is met continue along with it to check for obstacles instead of assuming there is only one valid path
+
+# Solution 2 - DP
 Anything after an obstacle in the first row is inaccessible so all possible paths after that are 0. After initializing 
 first row reuse DP solution from Unique Path's I, but whenever there is an obstacle inset zero.
+
