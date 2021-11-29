@@ -13,9 +13,7 @@ How many possible unique paths are there?
 | . | . | . | . | . | . | . |
 | . | . | . | . | . | . | F |
 
-S = Start
-
-F = Finish
+S = Start, F = Finish
 
     Input: m = 3, n = 7
     Output: 28
@@ -45,12 +43,12 @@ F = Finish
     1 <= m, n <= 100
     It's guaranteed that the answer will be less than or equal to 2 * 10^9.
 
-# Solution 1 - Recursion
+## Solution 1 - Recursion
 Pass next possible grid coord to the function until a wall is met then return `1`, which means an unique path has been 
 discovered. The number of recursion calls is a number of all unique paths. Reduce computation time by adding memoization 
 as the function is called with the same arguments multiple times.
 
-# Solution 2 - DP
+## Solution 2 - DP
 https://leetcode.com/problems/unique-paths/discuss/22954/C%2B%2B-DP
 
 Initialize the grid with ones. Iterate through the grid adding cells from the left and above which means that the path 
@@ -78,7 +76,7 @@ completed grid.
 |---|---|---|---|---|---|---|
 
 
-# Solution 3 - Combination
+## Solution 3 - Combination
 https://leetcode.com/problems/unique-paths/discuss/22958/Math-solution-O(1)-space
 
 All possible paths are the combination of going `DOWN` or `RIGHT` until we are in the right bottom corner.
@@ -110,11 +108,7 @@ An obstacle and space is marked as `1` and `0` respectively in the grid.
 | . | O | . |
 | . | . | F |
 
-S = Start
-
-F = Finish
-
-O = Obstacle
+S = Start, F = Finish, O = Obstacle
 
     Input: obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]
     Output: 2
@@ -130,12 +124,54 @@ O = Obstacle
     1 <= m, n <= 100
     obstacleGrid[i][j] is 0 or 1.
 
-# Solution 1 - Recursion
+## Solution 1 - Recursion
 Reuse previous recursive solution with more conditions added:
 * return 0 if helper met an obstacle, it means this is nota valid path
 * if a wall is met continue along with it to check for obstacles instead of assuming there is only one valid path
 
-# Solution 2 - DP
+## Solution 2 - DP
 Anything after an obstacle in the first row is inaccessible so all possible paths after that are 0. After initializing 
 first row reuse DP solution from Unique Path's I, but whenever there is an obstacle inset zero.
 
+# Unique Paths III
+https://leetcode.com/problems/unique-paths-iii/
+
+You are given an `m x n` integer array `grid` where `grid[i][j]` could be:
+
+    1 representing the starting square. There is exactly one starting square.
+    2 representing the ending square. There is exactly one ending square.
+    0 representing empty squares we can walk over.
+    -1 representing obstacles that we cannot walk over.
+
+Return the number of 4-directional walks from the starting square to the ending square, that walk over every non-obstacle square exactly once.
+
+**Example 1:**
+
+| S | . | . | . |
+|---|---|---|---|
+| . | . | . | . |
+| . | . | F | O |
+
+S = Start, F = Finish, O = Obstacle
+
+    Input: grid = [[1,0,0,0],[0,0,0,0],[0,0,2,-1]]
+    Output: 2
+    Explanation: We have the following two paths: 
+    1. (0,0),(0,1),(0,2),(0,3),(1,3),(1,2),(1,1),(1,0),(2,0),(2,1),(2,2)
+    2. (0,0),(1,0),(2,0),(2,1),(1,1),(0,1),(0,2),(0,3),(1,3),(1,2),(2,2)
+
+**Constraints:**:
+
+    m == grid.length
+    n == grid[i].length
+    1 <= m, n <= 20
+    1 <= m * n <= 20
+    -1 <= grid[i][j] <= 2
+    There is exactly one starting cell and one ending cell.
+
+
+## Solution 1 - DFS
+https://en.wikipedia.org/wiki/Depth-first_search
+
+Use recursive DFS to traverse grid until the goal is met, then measure if path is `n * m - obstacles` long to see if all
+empty squares were walked over.

@@ -1,11 +1,10 @@
-from functools import lru_cache
-
 class Solution:
     def uniquePathsIII(self, grid: [[int]]) -> int:
         obstacles = 0
 
         n = len(grid[0])
         m = len(grid)
+        g = grid
 
         for i, row in enumerate(grid):
             for j, cell in enumerate(row):
@@ -16,39 +15,24 @@ class Solution:
                 elif cell == -1:
                     obstacles = obstacles + 1
 
-        g = grid
+        walkable_cells = (n * m) - obstacles
 
         def dfs(x, y, p):
-            path = p[:]
-            # print("{}".format(p))
+            if (0 > x or x >= n) or (0 > y or y >= m):
+                return 0
 
-            path.append((x, y))
             if g[y][x] == -1 or (x, y) in p:
                 return 0
 
-            if x == end[0] and y == end[1]:
-                if len(path) == (n * m) - obstacles:
-                    # print(len(path))
-                    # print(path)
+            path = p[:]
+            path.append((x, y))
+
+            if (x, y) == end:
+                if len(path) == walkable_cells:
                     return 1
                 else:
                     return 0
 
-            stack = []
-
-            if x > 0:
-                stack.append((x - 1, y))
-            if x < n - 1:
-                stack.append((x + 1, y))
-            if y > 0:
-                stack.append((x, y - 1))
-            if y < m - 1:
-                stack.append((x, y + 1))
-
-            return sum([dfs(x, y, path) for x, y in stack])
+            return sum([dfs(x, y, path) for x, y in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1))])
 
         return dfs(start[0], start[1], [])
-
-
-print(Solution().uniquePathsIII([[1,0,0,0],[0,0,0,0],[0,0,0,2]]))
-print(Solution().uniquePathsIII([[1,0,0,0],[0,0,0,0],[0,0,2,-1]]))
