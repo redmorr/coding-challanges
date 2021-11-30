@@ -1,23 +1,14 @@
-from treenode import TreeNode
-
-
 class Solution:
+    def hasPathSum(self, root, sum):
+        res = []
+        self.dfs(root, sum, res)
+        return any(res)
 
-    def hasPathSum(self, root: [TreeNode], targetSum: int) -> bool:
-        if root is None:
-            return False
-
-        def dfs(node, path):
-            if path + node.val == targetSum and node.left is None and node.right is None:
-                raise Exception
-            if node.left is not None:
-                dfs(node.left, path + node.val)
-            if node.right is not None:
-                dfs(node.right, path + node.val)
-
-        try:
-            dfs(root, 0)
-        except Exception:
-            return True
-
-        return False
+    def dfs(self, node, target, res):
+        if node:
+            if not node.left and not node.right and node.val == target:
+                res.append(True)
+            if node.left:
+                self.dfs(node.left, target - node.val, res)
+            if node.right:
+                self.dfs(node.right, target - node.val, res)
