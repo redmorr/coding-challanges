@@ -50,5 +50,7 @@ graph TD;
     -1000 <= Node.val <= 1000
     -1000 <= targetSum <= 1000
 
-## Solution 1 - DFS v1
-DFS raising exception when the result is found
+## Solution 1 - DFS Recursively
+Straightforward recursive DFS
+
+## Solution 2 - DFS with stack
