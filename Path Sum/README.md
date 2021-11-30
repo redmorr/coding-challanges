@@ -51,6 +51,7 @@ graph TD;
     -1000 <= targetSum <= 1000
 
 ## Solution 1 - DFS Recursively
-Straightforward recursive DFS
+Straightforward recursive DFS.
 
 ## Solution 2 - DFS with stack
+Straightforward DFS with stack.

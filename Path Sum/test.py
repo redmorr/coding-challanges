@@ -2,7 +2,7 @@ import pytest
 
 from treenode import TreeNode
 import dfs_recursive
-
+import dfs_stack
 
 
 def grow_tree(list_of_nodes):
@@ -36,6 +36,7 @@ testcases = [(True, 22, grow_tree([5, 4, 8, 11, None, 13, 4, 7, 2, None, None, N
 
 
 @pytest.mark.parametrize('expected, target_sum, root', testcases)
-def test_has_path_sum(expected, target_sum, root):
-    assert dfs_recursive.Solution().hasPathSum(root, target_sum) == expected
+@pytest.mark.parametrize('solution_class', [dfs_recursive.Solution, dfs_stack.Solution], ids=['DFS Recursive', 'DFS Stack'])
+def test_has_path_sum(solution_class, expected, target_sum, root):
+    assert solution_class().hasPathSum(root, target_sum) == expected
 
