@@ -1,4 +1,4 @@
-# Path Sum
+# Path Sum I
 https://leetcode.com/problems/path-sum/
 
 Given the `root` of a binary tree and an integer `targetSum`, return `true` if the tree has a **root-to-leaf** path such
@@ -59,3 +59,34 @@ Straightforward DFS with stack.
 ## Solution 2 - BFS with queue
 Add children to the end of the queue then `pop(0)` to take the first element. Decrease target sum by val until it 
 reaches zero.
+
+# Path Sum II
+https://leetcode.com/problems/path-sum-ii/
+
+Given the `root` of a binary tree and an integer `targetSum`, return all **root-to-leaf** paths where the sum of the 
+node **values** in the path equals `targetSum`. Each path should be returned as a list of the node **values**, not node 
+references.
+
+A **root-to-leaf** path is a path starting from the root and ending at any leaf node. A **leaf** is a node with no children.
+
+**Example 1:**
+```mermaid
+graph TD;
+    5-->4;
+    5-->8;
+    4-->11;
+    11-->7;
+    11-->2;
+    8-->13;
+    8-->.4;
+    .4-->5.;
+    .4-->1;
+```
+    Input: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
+    Output: [[5,4,11,2],[5,8,4,5]]
+    Explanation: There are two paths whose sum equals targetSum:
+    5 + 4 + 11 + 2 = 22
+    5 + 8 + 4 + 5 = 22
+
+# Solution 1 DFS - Recursive
+Adapted previous solution
