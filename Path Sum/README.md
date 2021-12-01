@@ -55,3 +55,7 @@ Straightforward recursive DFS.
 
 ## Solution 2 - DFS with stack
 Straightforward DFS with stack.
+
+## Solution 2 - BFS with queue
+Add children to the end of the queue then `pop(0)` to take the first element. Decrease target sum by val until it 
+reaches zero.
