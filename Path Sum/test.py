@@ -3,7 +3,7 @@ import pytest
 from treenode import TreeNode
 import dfs_recursive_1
 import dfs_recursive_2
-# import dfs_recursive_3
+import dfs_recursive_3
 import dfs_stack
 import bfs_queue
 
@@ -37,7 +37,11 @@ testcases2 = [([[5, 4, 11, 2], [5, 8, 4, 5]], 22, grow_tree([5, 4, 8, 11, None, 
               ([], 5, grow_tree([1, 2, 3])),
               ([], 0, grow_tree([]))]
 
-testcases3 = [(3, 8, grow_tree([10, 5, -3, 3, 2, None, 11, 3, -2, None, 1]))]
+testcases3 = [(3, 8, grow_tree([10, 5, -3, 3, 2, None, 11, 3, -2, None, 1])),
+              (3, 22, grow_tree([5, 4, 8, 11, None, 13, 4, 7, 2, None, None, 5, 1])),
+              (1, 1, grow_tree([1])),
+              (0, 0, grow_tree([])),
+              (1, 1, grow_tree([1, 2, None]))]
 
 
 @pytest.mark.parametrize('expected, target_sum, root', testcases)
@@ -54,9 +58,9 @@ def test_path_sum_2(solution_class, expected, target_sum, root):
     for i, row in enumerate(expected):
         for j, _ in enumerate(row):
             assert expected[i][j] == result[i][j]
-#
-#
-# @pytest.mark.parametrize('expected, target_sum, root', testcases3)
-# @pytest.mark.parametrize('solution_class', [dfs_recursive_3.Solution], ids=['DFS Recursive'])
-# def test_path_sum_3(solution_class, expected, target_sum, root):
-#     assert solution_class().pathSum(root, target_sum) == expected
+
+
+@pytest.mark.parametrize('expected, target_sum, root', testcases3)
+@pytest.mark.parametrize('solution_class', [dfs_recursive_3.Solution], ids=['DFS Recursive'])
+def test_path_sum_3(solution_class, expected, target_sum, root):
+    assert solution_class().pathSum(root, target_sum) == expected
