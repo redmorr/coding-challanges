@@ -1,28 +1,19 @@
-class Solution:
-    def pathSum(self, root, target_sum):
-        if root:
-            if root.left is None and root.right is None:
-                if root.val == target_sum:
-                    return 1
-                else:
-                    return 0
+class Solution(object):
+    def pathSum(self, root, target):
+        self.result = 0
+        cache = {0: 1}
+        self.dfs(root, target, 0, cache)
+        return self.result
 
-        self.res = 0
-        self.dfs(root, target_sum, [])
-        return self.res
+    def dfs(self, root, target, curr_path, cache):
+        if root is None:
+            return
 
-    def dfs(self, node, target_sum, cumsums):
-        if node:
-            new_cumsums = []
-            for sum in cumsums:
-                sum += node.val
-                new_cumsums.append(sum)
-                if sum == target_sum:
-                    self.res += 1
-            if node.val == target_sum:
-                self.res += 1
-            new_cumsums.append(node.val)
-            if node.left:
-                self.dfs(node.left, target_sum, new_cumsums)
-            if node.right:
-                self.dfs(node.right, target_sum, new_cumsums)
+        curr_path += root.val
+        old_path = curr_path - target
+        self.result += cache.get(old_path, 0)
+        cache[curr_path] = cache.get(curr_path, 0) + 1
+
+        self.dfs(root.left, target, curr_path, cache)
+        self.dfs(root.right, target, curr_path, cache)
+        cache[curr_path] -= 1
