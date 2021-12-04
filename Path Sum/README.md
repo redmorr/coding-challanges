@@ -88,5 +88,51 @@ graph TD;
     5 + 4 + 11 + 2 = 22
     5 + 8 + 4 + 5 = 22
 
-# Solution 1 DFS - Recursive
+## Solution 1 DFS - Recursive
 Adapted previous solution
+
+# Path Sum III
+https://leetcode.com/problems/path-sum-iii/
+
+Given the `root` of a binary tree and an integer `targetSum`, return the number of paths where the sum of the values 
+along the path equals `targetSum`.
+
+The path does not need to start or end at the root or a leaf, but it must go downwards (i.e., traveling only from parent
+nodes to child nodes).
+
+**Example 1:**
+```mermaid
+graph TD;
+    10-->5;
+    10-->-3;
+    5-->3;
+    5-->2;
+    3-->3.;
+    3-->-2;
+    2-->1;
+    -3-->11;
+
+```
+    Input: root = [10,5,-3,3,2,null,11,3,-2,null,1], targetSum = 8
+    Output: 3
+    Explanation: The paths that sum to 8 are shown.
+
+**Example 2:**
+
+    Input: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
+    Output: 3
+
+**Constraints:**
+
+    The number of nodes in the tree is in the range [0, 1000].
+    -109 <= Node.val <= 109
+    -1000 <= targetSum <= 1000
+
+## Solution 1 - DFS Recursively with memoization
+https://leetcode.com/problems/path-sum-iii/discuss/141424/Python-step-by-step-walk-through.-Easy-to-understand.-Two-solutions-comparison.-%3A-)
+
+1. In order to optimize from the brutal force solution, we will have to think of a clear way to memorize the intermediate result. Namely in the brutal force solution, we did a lot repeated calculation. For example `1->3->5`, we calculated: 1, 1+3, 1+3+5, 3, 3+5, 5.
+2. This is a classical 'space and time tradeoff': we can create a dictionary (named `cache`) which saves all the path sum (from root to current node) and their frequency.
+3. Again, we traverse through the tree, at each node, we can get the `currPathSum` (from root to current node). If within this path, there is a valid solution, then there must be a `oldPathSum` such that `currPathSum - oldPathSum = target`.
+4. We just need to add the frequency of the oldPathSum to the result.
+5. During the DFS break down, we need to -1 in `cache[currPathSum]`, because this path is not available in later traverse.
